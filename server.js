@@ -8,13 +8,6 @@ app.use(express.static('public'))
 var connectedPeers = []
 
 io.on('connection', function(socket){
-  socket.on('init', x => {
-    socket.broadcast.emit('initPeers', {
-      connectedPeers
-    })
-  })
-
-
   socket.on('userjoin', color => {
     socket.color = color
     connectedPeers.push(socket)
