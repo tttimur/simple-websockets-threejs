@@ -8,6 +8,7 @@ app.use(express.static('public'))
 var connectedPeers = []
 
 io.on('connection', function(socket){
+
   socket.on('userjoin', color => {
     socket.color = color
     connectedPeers.push(socket)
@@ -20,9 +21,29 @@ io.on('connection', function(socket){
 
   socket.on('position', position => {
     console.log(position, socket.id)
+
+    for (var i = 0; i <= connectedPeers.length - 1; i++) {
+      if (connectedPeers[i].id === socket.id) {
+        connectedPeers[i].position = position
+      }
+    }
+
     io.emit('positionReceived', {
       position, id: socket.id
     })
+  })
+
+  socket.on('get-peers', x => {
+    const filteredPeers = connectedPeers.map(peer => {
+      return {
+        id: peer.id,
+        color: peer.color,
+        position: peer.position ? peer.position : false
+      }
+    })
+
+    console.log(filteredPeers, '')
+    io.emit('send-peers', filteredPeers)
   })
 
   socket.on('disconnect', function () {
@@ -34,6 +55,6 @@ io.on('connection', function(socket){
   })
 })
 
-http.listen(3000, function(){
+http.listen(process.env.PORT, function(){
   console.log('listening on *:3000');
 });
