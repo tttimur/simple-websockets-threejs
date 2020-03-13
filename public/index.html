@@ -101,9 +101,9 @@ class App {
 
  init() {
     this.scene = new THREE.Scene()
-    this.camera = new THREE.PerspectiveCamera(20,1,0.1,100)
-    this.camera.position.z = 30
-    this.camera.position.y = 1
+    this.camera = new THREE.PerspectiveCamera(40,1,0.1,100)
+    this.camera.position.z = 10
+    this.camera.position.y = 1.56
 
     this.textureLoader = new THREE.TextureLoader()
 
@@ -216,7 +216,7 @@ class App {
 
       if (!send) return false
       this.camera.position.x = this.self.position.x
-      this.camera.position.z = this.self.position.z + 30
+      this.camera.position.z = this.self.position.z + 10
       this.socket.emit('position', this.self.position)
     })
   }
@@ -227,7 +227,7 @@ class App {
   }
 
   createBody(color, id = false, position = false) {
-    const geo = new THREE.SphereBufferGeometry(0.45,20,20)
+    const geo = new THREE.SphereBufferGeometry(0.3,20,20)
     const mat = new THREE.MeshBasicMaterial({
       color: new THREE.Color(color),
       alphaTest:0.4
