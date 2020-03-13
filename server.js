@@ -42,7 +42,6 @@ io.on('connection', function(socket){
       }
     })
 
-    console.log(filteredPeers, '')
     io.emit('send-peers', filteredPeers)
   })
 
