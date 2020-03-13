@@ -188,7 +188,7 @@ class App {
     this.scene.fog = new THREE.Fog(0xffffff, 0.0025, 100);
 
     var geometry = new THREE.PlaneBufferGeometry(1000,1000, 200, 200);
-    var material = new THREE.MeshBasicMaterial({ color: 0xffeaea, wireframe: true, side: THREE.DoubleSide} );
+    var material = new THREE.MeshBasicMaterial({ color: 0xffeaea, side: THREE.DoubleSide} );
     var plane = new THREE.Mesh( geometry, material );
     plane.rotation.x = THREE.Math.degToRad(90)
     plane.position.y = -0.45
